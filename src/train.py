@@ -102,13 +102,13 @@ def main():
         if val_acc > best_val_acc:
             best_val_acc = val_acc
             torch.save({"model": model.state_dict(), "classes": classes}, best_path)
-            print(f"  ✅ Saved best model to {best_path} (val_acc={best_val_acc:.4f})")
+            print(f"Saved best model to {best_path} (val_acc={best_val_acc:.4f})")
 
     # Final test with best weights
     ckpt = torch.load(best_path, map_location=device)
     model.load_state_dict(ckpt["model"])
     test_loss, test_acc = evaluate(model, test_loader, device)
-    print(f"🎯 Test: loss={test_loss:.4f} acc={test_acc:.4f}")
+    print(f"Test: loss={test_loss:.4f} acc={test_acc:.4f}")
 
 if __name__ == "__main__":
     main()
