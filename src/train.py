@@ -5,9 +5,9 @@ import torch.nn as nn
 import torch.optim as optim
 from tqdm import tqdm
 
-from config import Config
-from data import build_loaders
-from model import build_model, freeze_backbone, unfreeze_last_block
+from src.config import Config
+from src.data import build_loaders
+from src.model import build_model, freeze_backbone, unfreeze_last_block
 
 def accuracy(logits, y):
     preds = logits.argmax(dim=1)
@@ -61,6 +61,11 @@ def main():
         unfreeze_last_block(model, cfg.model_name)
 
     model = model.to(device)
+
+    if cfg.resume_from_checkpoint and cfg.checkpoint_path:
+        print(f"Resuming from checkpoint: {cfg.checkpoint_path}")
+        ckpt = torch.load(cfg.checkpoint_path, map_location=device)
+        model.load_state_dict(ckpt["model"])
 
     # Only train parameters that require grad
     params = [p for p in model.parameters() if p.requires_grad]
