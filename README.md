@@ -118,7 +118,6 @@ Train a stable classifier head on top of a fixed, pretrained feature extractor.
 **Typical configuration (Phase A):**
 - resume_from_checkpoint = True
 - checkpoint_path = "runs/best_efficientnet_b0.pt"
-
 - freeze_backbone = True
 - fine_tune_last_block = True
 - epochs = 8
