@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from collections import Counter
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -61,6 +62,12 @@ def main():
         unfreeze_last_block(model, cfg.model_name)
 
     model = model.to(device)
+
+    # weighted loss from train dataset
+    counts = Counter(train_loader.dataset.targets)
+    weights = torch.tensor([1.0 / counts[i] for i in range(num_classes)], dtype=torch.float)
+    weights = (weights / weights.sum() * num_classes).to(device)
+    loss_fn = nn.CrossEntropyLoss(weight=weights)
 
     if cfg.resume_from_checkpoint and cfg.checkpoint_path:
         print(f"Resuming from checkpoint: {cfg.checkpoint_path}")
