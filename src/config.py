@@ -35,7 +35,7 @@ class Config:
     # Phase A: feature extraction
     freeze_backbone: bool = True
     # Phase B: fine-tuning
-    fine_tune_last_block: bool = False     # set True after Phase A
+    fine_tune_last_block: bool = True     # set True after Phase A
     resume_from_checkpoint: bool = True
     checkpoint_path: str | None = None    
     checkpoint_path = "runs/best_efficientnet_b0.pt"

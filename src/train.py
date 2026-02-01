@@ -68,6 +68,8 @@ def main():
     weights = torch.tensor([1.0 / counts[i] for i in range(num_classes)], dtype=torch.float)
     weights = (weights / weights.sum() * num_classes).to(device)
     loss_fn = nn.CrossEntropyLoss(weight=weights)
+    print("Class counts:", counts)
+    print("Class weights:", weights.detach().cpu().tolist())
 
     if cfg.resume_from_checkpoint and cfg.checkpoint_path:
         print(f"Resuming from checkpoint: {cfg.checkpoint_path}")
