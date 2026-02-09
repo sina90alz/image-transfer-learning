@@ -22,7 +22,7 @@ class Config:
     # -------------------------
     # Training
     # -------------------------
-    epochs: int = 8                        # first run = sanity check
+    epochs: int = 10                       # first run = sanity check
     seed: int = 42
     device: str = "auto"                   # "auto" | "cpu" | "cuda"
 
@@ -37,13 +37,12 @@ class Config:
     # Phase B: fine-tuning
     fine_tune_last_block: bool = True     # set True after Phase A
     resume_from_checkpoint: bool = True
-    checkpoint_path: str | None = None    
-    checkpoint_path = "runs/best_efficientnet_b0.pt"
+    checkpoint_path: str | None = "runs/best_efficientnet_b0.pt"
 
     # -------------------------
     # Optimizer
     # -------------------------
-    lr: float = 1e-4
+    lr: float = 3e-5
     weight_decay: float = 1e-4
 
     # Optional: gradient clipping (safer/stabler)

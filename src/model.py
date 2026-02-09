@@ -39,5 +39,5 @@ def unfreeze_last_block(model: nn.Module, model_name: str):
             p.requires_grad = True
     elif model_name == "efficientnet_b0":
         # EfficientNet: unfreeze last few feature blocks
-        for p in model.features[-2:].parameters():
+        for p in model.features[-3:].parameters():
             p.requires_grad = True
