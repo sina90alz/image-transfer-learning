@@ -31,8 +31,8 @@ def main():
     # Save classes alongside for deployment
     (OUT_PATH.parent / "classes.txt").write_text("\n".join(classes), encoding="utf-8")
 
-    print(f"✅ Saved TorchScript model to: {OUT_PATH}")
-    print(f"✅ Saved classes to: {OUT_PATH.parent / 'classes.txt'}")
+    print(f"Saved TorchScript model to: {OUT_PATH}")
+    print(f"Saved classes to: {OUT_PATH.parent / 'classes.txt'}")
 
 if __name__ == "__main__":
     main()
