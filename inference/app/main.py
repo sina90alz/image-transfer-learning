@@ -2,6 +2,7 @@ from fastapi import FastAPI, UploadFile, File, HTTPException
 from app.schemas import PredictResponse, Prediction, MetadataResponse
 from app.model import InferenceModel
 from app.config import settings
+from typing import List
 
 app = FastAPI(title="Image Transfer Learning Inference", version="1.0.0")
 
@@ -54,3 +55,22 @@ async def predict(file: UploadFile = File(...)):
         top_k=3,
         predictions=[Prediction(label=lbl, confidence=round(conf, 6)) for lbl, conf in preds],
     )
+
+@app.post("/predict_batch")
+async def predict_batch(files: List[UploadFile] = File(...)):
+    if _model is None:
+        raise HTTPException(status_code=503, detail="Model not loaded")
+
+    outputs = []
+    for f in files:
+        if f.content_type is None or not f.content_type.startswith("image/"):
+            raise HTTPException(status_code=400, detail=f"Invalid file type: {f.filename}")
+
+        image_bytes = await f.read()
+        preds = _model.predict_topk(image_bytes, k=3)
+        outputs.append({
+            "filename": f.filename,
+            "predictions": [{"label": lbl, "confidence": round(conf, 6)} for lbl, conf in preds],
+        })
+
+    return {"count": len(outputs), "results": outputs}
