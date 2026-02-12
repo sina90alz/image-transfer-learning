@@ -37,8 +37,20 @@ def main():
     print(f"Using {len(images)} sample images from: {samples_dir}")
 
     def call_once(img_path: Path):
+        mime = "image/jpeg"
         with open(img_path, "rb") as f:
-            return requests.post(args.url, files={"file": f}, timeout=30)
+            r = requests.post(
+                args.url,
+                files={"file": (img_path.name, f, mime)},
+                timeout=30,
+            )
+        if r.status_code != 200:
+            print(f"\n Request failed for: {img_path}")
+            print("Status:", r.status_code)
+            print("Response:", r.text)
+        r.raise_for_status()
+        return r
+
 
     # Warmup (random images)
     for _ in range(args.warmup):
