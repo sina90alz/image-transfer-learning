@@ -17,7 +17,7 @@ runs/
 checkpoints/
 *.pt
 *.pth
-*.onnx
+*.onnx.data
 
 # =========================
 # Data (never commit data)
