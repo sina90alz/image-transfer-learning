@@ -5,3 +5,6 @@ torch
 torchvision
 pillow
 python-multipart
+sqlalchemy>=2.0
+aiosqlite>=0.20
+pydantic-settings>=2.0
