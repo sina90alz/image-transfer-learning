@@ -62,3 +62,7 @@ Desktop.ini
 
 # Linux
 *~
+
+# Database files (if any)
+inference/app.db
+*.db
