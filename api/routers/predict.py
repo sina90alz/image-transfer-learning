@@ -4,14 +4,13 @@ from typing import List
 from fastapi import APIRouter, UploadFile, File, HTTPException, Request, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.schemas import PredictResponse, Prediction
-from inference.app.core.deps import get_api_client
-from inference.app.db.session import get_db
-from inference.app.db.models import PredictionLog
+from api.core.deps import get_api_client
+from api.db.session import get_db
+from api.db.models import PredictionLog
 
 router = APIRouter(tags=["predict"])
 
-@router.post("/predict", response_model=PredictResponse)
+@router.post("/predict", response_model=PredictionLog)
 async def predict(
     request: Request,
     file: UploadFile = File(...),

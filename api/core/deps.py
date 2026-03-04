@@ -2,9 +2,9 @@ from fastapi import Header, HTTPException, status, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
-from inference.app.db.session import get_db
-from inference.app.db.models import ApiClient
-from inference.app.core.security import hash_api_key
+from api.db.session import get_db
+from api.db.models import ApiClient
+from api.core.security import hash_api_key
 
 async def get_api_client(
     x_api_key: str | None = Header(default=None, alias="X-API-Key"),

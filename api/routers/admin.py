@@ -2,10 +2,10 @@ from fastapi import APIRouter, Depends, HTTPException, Header
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
-from inference.app.core.config import settings
-from inference.app.core.security import generate_api_key, hash_api_key
-from inference.app.db.session import get_db
-from inference.app.db.models import ApiClient
+from api.core.config import settings
+from api.core.security import generate_api_key, hash_api_key
+from api.db.session import get_db
+from api.db.models import ApiClient
 
 router = APIRouter(prefix="/admin", tags=["admin"])
 
