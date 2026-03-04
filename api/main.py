@@ -1,20 +1,17 @@
 from fastapi import FastAPI
 
-from app.model import InferenceModel
-from app.config import settings
-
-from inference.app.db.init_db import init_db
-from inference.app.routers import health, metadata, predict, admin
+from api.model import InferenceModel
+from api.config import settings
+from api.db.init_db import init_db
+from api.routers import health, metadata, predict, admin
 
 def create_app() -> FastAPI:
     app = FastAPI(title="Image Transfer Learning Inference", version="1.0.0")
 
-    @app.lifespan("startup")
+    # keep your startup logic (we can refine later)
+    @app.on_event("startup")
     async def startup():
-        # init DB tables
         await init_db()
-
-        # load model once
         app.state.model = InferenceModel(
             model_path=settings.model_path,
             image_size=settings.image_size,
