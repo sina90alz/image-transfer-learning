@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, Header
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
-from api.core.config import settings
+from api.config import settings
 from api.core.security import generate_api_key, hash_api_key
 from api.db.session import get_db
 from api.db.models import ApiClient
