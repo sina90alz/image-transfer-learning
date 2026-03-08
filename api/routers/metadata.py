@@ -1,6 +1,6 @@
 from fastapi import APIRouter, HTTPException, Request
-from app.schemas import MetadataResponse
-from app.config import settings
+from api.schemas import MetadataResponse
+from api.config import settings
 
 router = APIRouter(tags=["metadata"])
 

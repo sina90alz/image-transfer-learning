@@ -5,13 +5,7 @@ pydantic==2.8.2
 pydantic-settings>=2.0
 
 python-multipart
-
 pillow
 
-# if still using PyTorch inference
-torch
-torchvision
-
-# database
 sqlalchemy>=2.0
 aiosqlite>=0.20

@@ -7,10 +7,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from api.core.deps import get_api_client
 from api.db.session import get_db
 from api.db.models import PredictionLog
+from api.schemas import PredictResponse, Prediction
 
 router = APIRouter(tags=["predict"])
 
-@router.post("/predict", response_model=PredictionLog)
+@router.post("/predict", response_model=PredictResponse)
 async def predict(
     request: Request,
     file: UploadFile = File(...),
