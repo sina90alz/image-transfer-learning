@@ -16,7 +16,7 @@ class Settings(BaseSettings):
     device: str = "cpu"
 
     # API/DB config
-    DATABASE_URL: str = "sqlite+aiosqlite:///./inference/app.db"
+    DATABASE_URL: str = "sqlite+aiosqlite:///./data/app.db"
     ADMIN_KEY: str = "change-me"
 
 

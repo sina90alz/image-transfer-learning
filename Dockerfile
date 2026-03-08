@@ -17,6 +17,8 @@ RUN pip install --no-cache-dir \
     torchvision \
     --index-url https://download.pytorch.org/whl/cpu
 
+RUN mkdir -p /app/data
+
 # Copy API code
 COPY api /app/api
 
